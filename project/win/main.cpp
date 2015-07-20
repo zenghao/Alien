@@ -1,39 +1,33 @@
-//#include "pch.h"
-//#include "AppDelegate.h"
-//void detect_memory_leaks( bool on_off )  
-//{  
-//    int flags = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);  
-//    if(!on_off)  
-//        flags &= ~_CRTDBG_LEAK_CHECK_DF;  
-//    else {  
-//        flags |= _CRTDBG_LEAK_CHECK_DF;  
-//        _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);  
-//        _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);  
-//    }  
-//    _CrtSetDbgFlag( flags );  
-//}
+#include "main.h"
+#include "AppDelegate.h"
 
-int main(int argc, char* argv[])
+USING_NS_CC;
+
+// uncomment below line, open debug console
+#define USE_WIN32_CONSOLE
+
+int APIENTRY _tWinMain(HINSTANCE hInstance,
+                       HINSTANCE hPrevInstance,
+                       LPTSTR    lpCmdLine,
+                       int       nCmdShow)
 {
-//#if _DEBUG
-//	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-//#endif // _DEBUG
-//
-//	int exit_code = EXIT_SUCCESS;
+    UNREFERENCED_PARAMETER(hPrevInstance);
+    UNREFERENCED_PARAMETER(lpCmdLine);
 
-	//{
-		//if (!check_types_validate())
-		//	exit_code = EXIT_FAILURE;
-		//_CrtDumpMemoryLeaks();
-		//detect_memory_leaks(true);
+#ifdef USE_WIN32_CONSOLE
+    AllocConsole();
+    freopen("CONIN$", "r", stdin);
+    freopen("CONOUT$", "w", stdout);
+    freopen("CONOUT$", "w", stderr);
+#endif
 
-		int len = sizeof(argv)/sizeof(char*);
-		/*CCLog(argv[0]);
-		AppDelegate *appDelegate = new AppDelegate();
-		exit_code = cocos2d::CCApplication::sharedApplication()->run();*/
+    // create the application instance
+    AppDelegate app;
+    int ret = Application::getInstance()->run();
 
-		//delete(appDelegate);
-	/*}
+#ifdef USE_WIN32_CONSOLE
+    FreeConsole();
+#endif
 
-	return exit_code;*/
+    return ret;
 }
